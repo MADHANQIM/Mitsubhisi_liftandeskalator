@@ -1,0 +1,182 @@
+/* Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: "Fira Sans", sans-serif;
+}
+
+:root {
+    --primary-color: #00E5FF;
+    --secondary-color: #06ff40;
+    --text-color: #000000;
+    --white: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.2);
+}
+
+/* Background Circle */
+.circle2 {
+    position: absolute;
+    bottom: 450px;
+    left: -155vh;
+    width: 550vh;
+    height: 250vh;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Navbar Styles */
+.navbar-nav {
+    margin-left: auto;
+}
+
+.img-brand img {
+    width: 150px;
+    height: auto;
+}
+
+/* Profile Card */
+.blue-card {
+    background-color: rgba(0, 229, 255, 0.5);
+    color: var(--text-color);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.image_circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 15px auto 0 auto;
+    margin-top: 10px;
+    position: relative;
+}
+
+.profile-image {
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.inner-circle {
+    width: 200px;
+    height: 200px;
+    background-color: var(--white);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+/* Absensi Card */
+.absensi-card {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.checkin1, .checkout {
+    text-decoration: none;
+}
+
+.checkin-card, .checkout-card {
+    width: 250px;
+    margin: 5px auto;
+    background-color: var(--primary-color);
+    border-radius: 30px;
+    box-shadow: 0 2px 4px var(--shadow);
+    height: 100px;
+}
+
+.image_checkin, .image_checkout {
+    height: 50px;
+    width: 50px;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+
+/* Carousel Image */
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+/* Alert Styles */
+.Checkin, .overlaycheckout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.alertboxin, .alertboxout {
+    background: var(--white);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--shadow);
+}
+
+.alertboxin img, .alertboxout img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.alertboxin button, .alertboxout button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .blue-card {
+        margin-top: 20px;
+    }
+
+    .image_circle {
+        margin-left: 20px;
+    }
+
+    .alertboxin, .alertboxout {
+        width: 80%;
+        margin: 0 10%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .blue-card {
+        padding: 15px;
+    }
+
+    .image_circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .alertboxin, .alertboxout {
+        width: 90%;
+        margin: 0 5%;
+    }
+}

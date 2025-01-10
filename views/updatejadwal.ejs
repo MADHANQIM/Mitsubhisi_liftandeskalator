@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="jadwals.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0-beta3/css/all.min.css">
+    <title>Toolbox Meeting Form</title>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 id="judul" class="text-primary text-center mb-4">TOOL BOX MEETING (TBM - KY)</h1>
+        <div class="card mb-4"></div>
+            <!-- Form to edit data -->
+            <form class="border p-4 bg-white shadow rounded" onsubmit="editData(event)">
+
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="namaanggota">Nama Anggota (Name Members)</label>
+                        <input id="namaanggota" type="text" name="namaanggota" required placeholder="Riandi, Anto, Bima" value="<%= jadwals.namaanggota %>">
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label for="proses">
+                        <select name="proses" id="proses" required>
+                            <option value="selesai" <%= jadwals.proses === "selesai" ? "selected" : "" %>>Selesai</option>
+                            <option value="belumselesai" <%= jadwals.proses === "belumselesai" ? "selected" : "" %>>Belum Selesai</option>
+                            
+                        </select>
+                    </label>
+                </div>
+                <br>
+                <br>
+                <input type="hidden" id="id_trouble" value="<%= id_jadwal %>">
+                <!-- Footer with Add Row and Submit Buttons -->
+                <div class="d-flex justify-content-between">
+                    <button type="submit" id="editData" class="btn btn-primary">Simpan Data Item</button>
+                    <button type="button" id="batal" class="btn btn-secondary" onclick="history.back()">Kembali</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<script>
+    let id_jadwal = parseInt(document.getElementById("id_trouble").value);
+        async function  editData(event){
+            event.preventDefault();
+            let namaanggota = document.getElementById("namaanggota").value;
+            let proses = document.getElementById("proses").value;
+            let result = await fetch(`/update/${id_jadwal}`, {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({namaanggota ,proses})
+                });
+
+            if (!result.ok){
+                return new Error("failed to update data");
+            }else{
+                let response = await result.json();
+                if (response.response != null){
+                    alert("Data item berhasil diperbaharui");
+                    window.location.href = "/jadwals";
+                } else {
+                    alert("Gagal memperbaharui data item");
+                }
+            }
+        }
+        let edit = document.getElementById("editData")
+        edit.addEventListener('click', editData);
+
+</script>
+</body>
+</html>

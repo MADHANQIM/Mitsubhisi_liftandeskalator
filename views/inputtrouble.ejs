@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="inputtrouble.css">
+    <title>Input Trouble</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Input Trouble</h1>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form id="trouble" action="/inputtrouble" method="post">
+                    <div class="form-group">
+                        <label for="inputTrouble">Masalah yang Terjadi</label>
+                        <input type="text" class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi masalah">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="condition">Kondisi</label>
+                        <input type="text" class="form-control" id="condition" name="kondisi" placeholder="Kondisi saat ini">
+                    </div> -->
+
+                    <div class="input-box">
+                        <label for="konidisi">
+                            <select id="kondisi" name="kondisi" required>
+                                <option value="" disabled selected>kondisi saat ini</option>
+                                <option value="penangansegera">penangan segera</option>
+                                <option value="darurat">Darurat</option>
+                                <option value="lukaberat">Luka berat</option>
+                            </select>
+                            <i class='bx bxs-briefcase'></i>
+                        </label>
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label for="problemType">Jenis Masalah</label>
+                        <input type="text" class="form-control" id="problemType" placeholder="Jenis masalah">
+                    </div> -->
+
+                    <div class="input-box">
+                        <label for="jenismasalah">
+                            <select id="jenismasalah" name="jenismasalah" required>
+                                <option value="" disabled selected>Jenis masalah</option>
+                                <option value="Kecelakaankerja">Kecelakaan Kerja</option>
+                                <option value="kerusakanmesin">Kerusakan Mesin</option>
+                            </select>
+                            <i class='bx bxs-briefcase'></i>
+                        </label>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="photoUpload">Input Foto</label>
+                        <input type="file" class="form-control-file" id="photoUpload" name="photoUpload">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Selesai</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script></script>
+
+    <!-- <script src="troubles.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

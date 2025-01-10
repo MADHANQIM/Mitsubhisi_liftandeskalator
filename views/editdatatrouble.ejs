@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="inputtrouble.css">
+    <title>Input Trouble</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 id="judul" class="text-primary text-center mb-4">Edit Trouble</h1>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form class="border p-4 bg-white shadow rounded" onsubmit="editData(event)">
+                    <div class="form-group">
+                        <label for="inputTrouble">Masalah yang Terjadi</label>
+                        <input type="text" class="form-control" id="deskripsi" value="<%= trouble.deskripsi %>" name="deskripsi" placeholder="Deskripsi masalah">
+                    </div>
+
+
+                    <div class="input-box">
+                        <label for="kondisi">
+                            <select id="kondisi" name="kondisi" required>
+                                <option value="penangansegera" <%= trouble.kondisi === "penangansegera" ? "selected" : "" %>>Penangan Segera</option>
+                                <option value="darurat" <%= trouble.kondisi === "darurat" ? "selected" : "" %>>Darurat</option>
+                                <option value="lukaberat" <%= trouble.kondisi === "lukaberat" ? "selected" : "" %>>Luka Berat</option>
+                            </select>                            
+                            <i class='bx bxs-briefcase'></i>
+                        </label>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="jenismasalah">
+                            <select id="jenismasalah" name="jenismasalah" required>
+                                <option value="Kecelakaankerja" <%= trouble.jenismasalah === "Kecelakaankerja" ? "selected" : "" %>>Kecelakaan Kerja</option>
+                                <option value="kerusakanmesin" <%= trouble.jenismasalah === "kerusakanmesin" ? "selected" : "" %>>Kerusakan Mesin</option>
+                            </select>                            
+                            <i class='bx bxs-briefcase'></i>
+                        </label>
+                    </div>
+                    <input type="hidden" id="id_trouble" value="<%= id_trouble %>">
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" id="editData"  >Simpan Data Item</button>
+                        <button type="button" id="batal" class="btn btn-secondary" onclick="history.back()">Kembali</button>
+                    </div>
+                </form>
+            </div>  
+        </div>
+    </div>
+    <script>
+        let id_trouble = parseInt(document.getElementById("id_trouble").value);
+        async function  editData(event){
+            event.preventDefault();
+            let deskripsi = document.getElementById("deskripsi").value;
+            let kondisi = document.getElementById("kondisi").value;
+            let jenismasalah = document.getElementById("jenismasalah").value;
+            let result =  await fetch(`/edit/${id_trouble}`,{
+                method : "PUT",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({deskripsi, kondisi, jenismasalah})
+            });
+            if (!result.ok){
+                return new Error("failed to update data");
+            }else{
+                let response = await result.json();
+                if (response.response != null){
+                    alert("Data item berhasil diperbaharui");
+                    window.location.href = "/trouble";
+                } else {
+                    alert("Gagal memperbaharui data item");
+                }
+            }
+        }
+        let edit = document.getElementById("editData")
+        edit.addEventListener('click', editData);
+    </script>
+
+
+    <!-- <script src="troubles.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

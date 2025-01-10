@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="trouble.css">
+    <title>kelompok12</title>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+
+        <header>
+            <div class="circle2"></div>
+            <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+                <div class="container-fluid">
+                    <a class="img-brand" href="#"><img src="./images/Logo-Mitsubishi-Jaya-removebg-preview.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav ms-auto">
+                            <a class="nav-link" href="/index"><i class='bx bx-home'></i> Home</a>
+                            <a class="nav-link" href="/jadwals"><i class="bx bx-book open"></i> Jadwal</a>
+                            <a class="nav-link" href="/trouble"><i class="bx bx-cog"></i> Masalah</a>
+                            <a class="nav-link" href="/"><i class="bx bx-user"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- <div class="card p-3">
+            <a href="inputtrouble.html" class="btn btn-primary btn-lg">Input Trouble</a>
+            <p class="mt-3">Riwayat Trouble</p>        
+        </div> -->
+        <h1 id="judul" class="text-primary text center mb-4">Riwayat Trouble</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <a id="baru" href="/inputtrouble" class="btn btn-primary">Tambah Data Baru</a>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>NO.</th>
+                    <th>deskripsi</th>
+                    <th>kondisi</th>
+                    <th>jenis Masalah</th>
+                    <th>Foto</th>
+                    <th colspan="2" class="text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="trouble">
+                <% let id_trouble = 0; %>
+                <% trouble.forEach(items =>{ %>
+                    <% id_trouble += 1; %>
+                    <tr>
+                        <td><%= id_trouble %> </td>
+                        <td><%= items.deskripsi %></td>
+                        <td><%= items.kondisi %></td>
+                        <td><%= items.jenismasalah %></td>
+                        <td><%= items.photoUpload %></td>
+                        <td class="text-center">
+                            <a href="/edit/<%= items.id_trouble %>" class="btn btn-warning btn-sm">Edit</a>
+                        </td>
+                        <td>
+                            <button onclick='deleteItem(`<%= items.id_trouble %>`)' class='btn btn-danger btn-sm'>Hapus</button>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function deleteItem(id_trouble){
+            if (confirm("Apakah Anda yakin ingin menghapus item ini?")) {
+                let result = await fetch(`/edit/${id_trouble}`, {
+                    method: "DELETE"
+                });
+
+                if (result.ok) {
+                    alert("Item berhasil dihapus");
+                    location.reload();
+                } else {
+                    alert("Gagal menghapus item");
+                }
+            }
+        }
+    </script>
+
+
+    <script src="trouble.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

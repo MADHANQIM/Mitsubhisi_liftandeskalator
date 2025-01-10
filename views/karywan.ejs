@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Data Karyawan</title>
+    <link rel="stylesheet" href="karyawan.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 id="judul" class="text-primary text-center mb-4">Edit Data Karyawan</h1>
+        <div class="card mb-4">
+            <div class="card-body">
+                <form id="registrasiForm" onsubmit="validateForm(event)" action="/daftar" method="POST">
+                    <h1>Edit Data Karyawan</h1>
+                    
+                    <div class="input-box">
+                        <label for="name">
+                            <input type="text" id="nama" name="nama" placeholder="Nama Lengkap" value="<%= API.nama %>" required>
+                            <i class='bx bxs-user'></i>
+                        </label>
+                    </div>
+                    <div class="input-box">
+                        <label for="email">
+                            <input type="text" id="email" name="email" placeholder="Email" required value="<%= API.email %>">
+                            <i class='bx bxs-envelope'></i>
+                        </label>
+                    </div>
+                    <div class="input-box">
+                        <label for="role">
+                            <select id="role" name="role" required>
+                                <option value="Manager" <%= API.role === "Manager" ? "selected" : "" %>>Manager</option>
+                                <option value="HRD" <%= API.role === "HRD" ? "selected" : "" %>>HRD</option>
+                                <option value="mandor"<%= API.role === "mandor" ? "selected" : "" %>>Mandor</option>
+                                <option value="operatorlift" <%= API.role === "operatorlift" ? "selected" : "" %>>Operator Lift</option>
+                                <option value="Teknisi" <%= API.role === "Teknisi" ? "selected" : "" %>>Teknisi</option>
+                            </select>
+                            <i class='bx bxs-briefcase'></i>
+                        </label>
+                    </div>
+                    
+                    <div class="input-box">
+                        <label for="password">
+                            <input type="text" id="password" name="password" placeholder="Password" required value="<%= API.password %>">
+                            <i class='bx bxs-lock'></i>
+                        </label>
+                    </div>
+                    
+                    
+                    <input type="hidden" id="id_karyawan" value="<%= id_karyawan %>">
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" id="editData" class="btn btn-primary">Simpan Data Item</button>
+                        <button type="button" id="batal" class="btn btn-secondary" onclick="history.back()">Kembali</button>
+                    </div>
+                </form>    
+            </div>  
+        </div>
+    </div>
+    <script>
+        let id_karyawan = parseInt(document.getElementById("id_karyawan").value);
+        async function  editData(event){
+            event.preventDefault();
+            let nama = document.getElementById("nama").value;
+            let email = document.getElementById("email").value;
+            let role = document.getElementById("role").value;
+            let password = document.getElementById("password").value;
+            let result =  await fetch(`/api/daftar/${id_karyawan}`,{
+                method : "PUT",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({nama, email, role, password})
+            });
+            if (!result.ok){
+                return new Error("failed to update data");
+            }else{
+                let response = await result.json();
+                if (response.response != null){
+                    alert("Data item berhasil diperbaharui");
+                    window.location.href = "/karywan";
+                } else {
+                    alert("Gagal memperbaharui data item");
+                }
+            }
+        }
+        let edit = document.getElementById("editData")
+        edit.addEventListener('click', editData);
+    </script>
+
+
+    <!-- <script src="troubles.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

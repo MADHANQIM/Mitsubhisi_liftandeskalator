@@ -1,0 +1,66 @@
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Daftar</title>
+        <link rel="stylesheet" href="login.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+        <img src="/images/lift2.jpg" alt="Background" class="background-img" id="background-img">
+        <div class="wrapper">  
+            <form id="registrasiForm" onsubmit="validateForm(event)" action="/daftar" method="POST" enctype="multipart/form-data">
+                <h1>Registrasi</h1>
+                
+                <div class="input-box">
+                    <label for="name">
+                        <input type="text" id="nama" name="nama" placeholder="Nama Lengkap" required>
+                        <i class='bx bxs-user'></i>
+                    </label>
+                </div>
+                <div class="input-box">
+                    <label for="email">
+                        <input type="text" id="email" name="email" placeholder="Email" required>
+                        <i class='bx bxs-envelope'></i>
+                    </label>
+                </div>
+                <div class="input-box">
+                    <label for="role">
+                        <select id="role" name="role" required>
+                            <option value="" disabled selected>Posisi Pekerjaan</option>
+                            <option value="Manager">Manager</option>
+                            <option value="HRD">HRD</option>
+                            <option value="mandor">Mandor</option>
+                            <option value="operatorlift">Operator Lift</option>
+                            <option value="Teknisi">Teknisi</option>
+                        </select>
+                        <i class='bx bxs-briefcase'></i>
+                    </label>
+                </div>
+                
+                <div class="input-box">
+                    <label for="password">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <i class='bx bxs-lock'></i>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="photoprofile">Foto-profile
+                    <input type="file" class="form-control-file" id="photoprofile" name="photoprofile" placeholder="Foto-Profile">
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn">Daftar</button>
+                
+                <div class="register-link">
+                    <p>Log in 
+                        <a href="/login.html">login</a>
+                    </p>    
+                </div>
+            </form>        
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>        
+    </body>
+    </html>
